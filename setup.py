@@ -38,7 +38,7 @@ setup(
     long_description_content_type="text/markdown",
     url="",
     packages=find_packages(),
-    python_requires="~=3.11.0",
+    python_requires=">=3.9.0",
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
