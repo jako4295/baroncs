@@ -91,7 +91,6 @@ class ChargeState:
                 va="top",
                 ha="left",
             )
-            fig.savefig("charge_state_distribution.png")
             fig.show()
 
         return charge_x, charge_y
