@@ -1,1 +1,1 @@
-include baroncs/baroncs/table/elements.csv
+recursive-include baroncs/baroncs/table/*.csv

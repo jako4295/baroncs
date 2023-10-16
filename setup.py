@@ -11,7 +11,7 @@ import pathlib
 here = pathlib.Path(__file__).parent.resolve()
 
 # Get the long description from the README file
-VERSION = "0.1.3"
+VERSION = "0.1.4"
 LONG_DESCRIPTION = (here / "README.md").read_text(encoding="utf-8")
 
 REQUIREMENTS: dict = {
