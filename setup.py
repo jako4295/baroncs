@@ -11,7 +11,7 @@ import pathlib
 here = pathlib.Path(__file__).parent.resolve()
 
 # Get the long description from the README file
-VERSION = "0.1.4"
+VERSION = "0.1.5"
 LONG_DESCRIPTION = (here / "README.md").read_text(encoding="utf-8")
 
 REQUIREMENTS: dict = {
@@ -38,7 +38,7 @@ setup(
     long_description_content_type="text/markdown",
     url="",
     packages=find_packages(),
-    package_data={"": ["baroncs/table/*.csv"]},
+    package_data={"": ["table/*.csv"]},
     python_requires=">=3.9.0",
     classifiers=[
         "Programming Language :: Python :: 3",
