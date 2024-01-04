@@ -27,12 +27,21 @@ class ChargeState:
 
         The formula for the mean charge state and the standard deviation depends on the atomic number.
         for Z < 54, the formula is given by equation 1 and 2 in the paper given as:
-        mean_charge_p = Z * (c_factor - exp(-83.28 * (beta / (Z ** (0.447)))))
-        std_charge = 0.5 * sqrt(mean_charge * (1 - (mean_charge / Z) ** (1.67)))
+
+        .. math::
+
+            \\text{mean_charge_p} = Z * (\\text{c_factor} - \\exp(-83.28 * (beta / (Z^{0.447}))))
+
+            \\text{std_charge} = 0.5 * \\sqrt{\\text{mean_charge_p} * (1 - (\\text{mean_charge_p} / Z)^{1.67})}
 
         For Z >= 54, the formula is given by equation 3 and 4 in the paper given as:
-        mean_charge = mean_charge * (1 - exp(-12.905 + 0.2124 * Z - 0.00122 * Z ** 2))
-        std_charge = sqrt(mean_charge_p * (0.07535 + 0.19 * (mean_charge_p / Z) - 0.2654 * (mean_charge_p / Z) ** 2))
+
+        .. math::
+
+            \\text{mean_charge} = \\text{mean_charge_p} * (1 - \\exp(-12.905 + 0.2124 * Z - 0.00122 * Z^2))
+
+            \\text{std_charge} = \\sqrt{\\text{mean_charge_p} * (0.07535 + 0.19 * (\\text{mean_charge_p} / Z) - 0.2654 * (\\text{mean_charge_p} / Z)^2)}
+
         Note that the mean_charge_p is the mean charge state calculated using equation 1. The article always uses
         the mean_charge_p in equation 4.
 
@@ -46,10 +55,12 @@ class ChargeState:
                                   If set to 5, the distribution will include 5 charge states on each side of the
                                   mean charge state.
         :param plot: Whether to plot the distribution or not. The plot is made as a bar plot:
+
                      >>> import matplotlib.pyplot as plt
                      >>> fig, ax = plt.subplots()
                      >>> ax.bar(distx, disty)
                      >>> fig.show()
+
         :return: The charge state distribution
         """
         self.energy = energy
@@ -105,6 +116,7 @@ class ChargeState:
     ) -> pd.DataFrame:
         """
         Generate a dataframe for each atom, which contains the following:
+
         - Name of the element
         - Atomic Number
         - Commonest Isotope
@@ -206,6 +218,7 @@ class ChargeState:
         If beta is set as a tuple of (energy, e0), the beta factor will be calculated from the energy and e0.
 
         If used together with std_charge_state() and mean_charge_state(), the beta factor can be set as either:
+
         >>> import baroncs as bcs
         >>> tmp = bcs.ChargeState()
         >>> tmp.beta = 0.09  # Set beta directly
