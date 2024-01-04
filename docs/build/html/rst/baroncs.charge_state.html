@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>baroncs.charge_state module &mdash; baroncs 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="baroncs" href="modules.html" />
+    <link rel="prev" title="baroncs package" href="baroncs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            baroncs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="baroncs.html">baroncs package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="baroncs.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">baroncs.charge_state module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#baroncs.charge_state.ChargeState"><code class="docutils literal notranslate"><span class="pre">ChargeState</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">baroncs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">baroncs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="baroncs.html">baroncs package</a></li>
+      <li class="breadcrumb-item active">baroncs.charge_state module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/baroncs.charge_state.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-baroncs.charge_state">
+<span id="baroncs-charge-state-module"></span><h1>baroncs.charge_state module<a class="headerlink" href="#module-baroncs.charge_state" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baroncs.charge_state.</span></span><span class="sig-name descname"><span class="pre">ChargeState</span></span><a class="reference internal" href="../_modules/baroncs/charge_state.html#ChargeState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baroncs.charge_state.ChargeState" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.beta">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">beta</span></span><a class="headerlink" href="#baroncs.charge_state.ChargeState.beta" title="Link to this definition"></a></dt>
+<dd><p>The relativistic beta factor.</p>
+<p>If beta is set as a float, it will be used as the beta factor.
+If beta is set as a tuple of (energy, e0), the beta factor will be calculated from the energy and e0.</p>
+<p>If used together with std_charge_state() and mean_charge_state(), the beta factor can be set as either:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">baroncs</span> <span class="k">as</span> <span class="nn">bcs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">bcs</span><span class="o">.</span><span class="n">ChargeState</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.09</span>  <span class="c1"># Set beta directly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">931.5</span><span class="p">)</span>  <span class="c1"># Set beta from energy and e0</span>
+<span class="go">and then the mean charge state and standard deviation can be calculated as:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span><span class="o">.</span><span class="n">mean_charge_state</span><span class="p">(</span><span class="mi">82</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span><span class="o">.</span><span class="n">std_charge_state</span><span class="p">(</span><span class="mi">82</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The relativistic beta factor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.charge_state_distribution">
+<span class="sig-name descname"><span class="pre">charge_state_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">931.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_onesided_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/baroncs/charge_state.html#ChargeState.charge_state_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baroncs.charge_state.ChargeState.charge_state_distribution" title="Link to this definition"></a></dt>
+<dd><p>Calculate the charge state distribution for a given atom.</p>
+<p>The formula for the mean charge state and the standard deviation depends on the atomic number.
+for Z &lt; 54, the formula is given by equation 1 and 2 in the paper given as:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\text{mean_charge_p} = Z * (\text{c_factor} - \exp(-83.28 * (beta / (Z^{0.447}))))\\\text{std_charge} = 0.5 * \sqrt{\text{mean_charge_p} * (1 - (\text{mean_charge_p} / Z)^{1.67})}\end{aligned}\end{align} \]</div>
+<p>For Z &gt;= 54, the formula is given by equation 3 and 4 in the paper given as:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\text{mean_charge} = \text{mean_charge_p} * (1 - \exp(-12.905 + 0.2124 * Z - 0.00122 * Z^2))\\\text{std_charge} = \sqrt{\text{mean_charge_p} * (0.07535 + 0.19 * (\text{mean_charge_p} / Z) - 0.2654 * (\text{mean_charge_p} / Z)^2)}\end{aligned}\end{align} \]</div>
+<p>Note that the mean_charge_p is the mean charge state calculated using equation 1. The article always uses
+the mean_charge_p in equation 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atomic_nr</strong> – The atomic number of the atom</p></li>
+<li><p><strong>beta</strong> – The relativistic beta factor</p></li>
+<li><p><strong>energy</strong> – The kinetic energy</p></li>
+<li><p><strong>e0</strong> – The rest mass energy</p></li>
+<li><p><strong>c_factor</strong> – The c factor</p></li>
+<li><p><strong>dist_onesided_len</strong> – The length of the distribution on one side of the mean.
+This will affect the amount of charge states included in the distribution.
+If set to 5, the distribution will include 5 charge states on each side of the
+mean charge state.</p></li>
+<li><p><strong>plot</strong> – <p>Whether to plot the distribution or not. The plot is made as a bar plot:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">distx</span><span class="p">,</span> <span class="n">disty</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The charge state distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.dataframe">
+<span class="sig-name descname"><span class="pre">dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">931.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/baroncs/charge_state.html#ChargeState.dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baroncs.charge_state.ChargeState.dataframe" title="Link to this definition"></a></dt>
+<dd><p>Generate a dataframe for each atom, which contains the following:</p>
+<ul class="simple">
+<li><p>Name of the element</p></li>
+<li><p>Atomic Number</p></li>
+<li><p>Commonest Isotope</p></li>
+<li><p>Abundance (%)</p></li>
+<li><p>Melting Point</p></li>
+<li><p>Nearest Q (A/Q=8)</p></li>
+<li><p>Actual Q/A</p></li>
+<li><p>A/Q</p></li>
+<li><p>Mean Charge</p></li>
+<li><p>Most Probable</p></li>
+<li><p>Standard Deviation</p></li>
+<li><p>Probable %</p></li>
+<li><p>Magnetic Rigidity</p></li>
+</ul>
+<p>If atoms is “all”, all atoms will be included in the dataframe. Otherwise provide it as a list of atomic
+numbers. e.g. [54, 82] to only use Xe and Pb.</p>
+<p>If beta is provided it will be used to create the dataframe.
+Otherwise it will be calculated from the energy and e0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> – The relativistic factor</p></li>
+<li><p><strong>e0</strong> – The rest mass energy</p></li>
+<li><p><strong>energy</strong> – The kinetic energy</p></li>
+<li><p><strong>atoms</strong> – The atoms to include in the dataframe. If “all”, all atoms will be included.
+Otherwise provide it as a list of atomic numbers. e.g. [54, 82]</p></li>
+<li><p><strong>c_factor</strong> – The c factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dataframe with the charge state distribution for each atom</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.e0">
+<span class="sig-name descname"><span class="pre">e0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#baroncs.charge_state.ChargeState.e0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#baroncs.charge_state.ChargeState.energy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.mean_charge_state">
+<span class="sig-name descname"><span class="pre">mean_charge_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/baroncs/charge_state.html#ChargeState.mean_charge_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baroncs.charge_state.ChargeState.mean_charge_state" title="Link to this definition"></a></dt>
+<dd><p>Calculates the mean charge state.</p>
+<p>It is based on either Equation 3 or 1 in the paper. This depends on the atomic number.
+If the atomic number is less than 54, the equation 1 is used. Otherwise equation 3 is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atomic_nr</strong> – The atomic number</p></li>
+<li><p><strong>c_factor</strong> – The c factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mean charge state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baroncs.charge_state.ChargeState.std_charge_state">
+<span class="sig-name descname"><span class="pre">std_charge_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/baroncs/charge_state.html#ChargeState.std_charge_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baroncs.charge_state.ChargeState.std_charge_state" title="Link to this definition"></a></dt>
+<dd><p>Calculates the standard deviation of the charge state distribution.</p>
+<p>It is based on either Equation 4 or 2 in the paper. This depends on the atomic number.
+If the atomic number is less than 54, the equation 2 is used. Otherwise equation 4 is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atomic_nr</strong> – The atomic number</p></li>
+<li><p><strong>c_factor</strong> – The c factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The standard deviation of the charge state distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="baroncs.html" class="btn btn-neutral float-left" title="baroncs package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="baroncs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakob Olsen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

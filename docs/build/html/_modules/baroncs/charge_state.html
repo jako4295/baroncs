@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>baroncs.charge_state &mdash; baroncs 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            baroncs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rst/baroncs.html">baroncs package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">baroncs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">baroncs.charge_state</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for baroncs.charge_state</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="ChargeState">
+<a class="viewcode-back" href="../../rst/baroncs.html#baroncs.charge_state.ChargeState">[docs]</a>
+<span class="k">class</span> <span class="nc">ChargeState</span><span class="p">:</span>
+    <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">e0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="ChargeState.charge_state_distribution">
+<a class="viewcode-back" href="../../rst/baroncs.html#baroncs.charge_state.ChargeState.charge_state_distribution">[docs]</a>
+    <span class="k">def</span> <span class="nf">charge_state_distribution</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">atomic_nr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.2</span><span class="p">,</span>
+        <span class="n">e0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">931.5</span><span class="p">,</span>
+        <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">dist_onesided_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">plot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the charge state distribution for a given atom.</span>
+
+<span class="sd">        The formula for the mean charge state and the standard deviation depends on the atomic number.</span>
+<span class="sd">        for Z &lt; 54, the formula is given by equation 1 and 2 in the paper given as:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \\text{mean_charge_p} = Z * (\\text{c_factor} - \\exp(-83.28 * (beta / (Z^{0.447}))))</span>
+
+<span class="sd">            \\text{std_charge} = 0.5 * \\sqrt{\\text{mean_charge_p} * (1 - (\\text{mean_charge_p} / Z)^{1.67})}</span>
+
+<span class="sd">        For Z &gt;= 54, the formula is given by equation 3 and 4 in the paper given as:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \\text{mean_charge} = \\text{mean_charge_p} * (1 - \\exp(-12.905 + 0.2124 * Z - 0.00122 * Z^2))</span>
+
+<span class="sd">            \\text{std_charge} = \\sqrt{\\text{mean_charge_p} * (0.07535 + 0.19 * (\\text{mean_charge_p} / Z) - 0.2654 * (\\text{mean_charge_p} / Z)^2)}</span>
+
+<span class="sd">        Note that the mean_charge_p is the mean charge state calculated using equation 1. The article always uses</span>
+<span class="sd">        the mean_charge_p in equation 4.</span>
+
+<span class="sd">        :param atomic_nr: The atomic number of the atom</span>
+<span class="sd">        :param beta: The relativistic beta factor</span>
+<span class="sd">        :param energy: The kinetic energy</span>
+<span class="sd">        :param e0: The rest mass energy</span>
+<span class="sd">        :param c_factor: The c factor</span>
+<span class="sd">        :param dist_onesided_len: The length of the distribution on one side of the mean.</span>
+<span class="sd">                                  This will affect the amount of charge states included in the distribution.</span>
+<span class="sd">                                  If set to 5, the distribution will include 5 charge states on each side of the</span>
+<span class="sd">                                  mean charge state.</span>
+<span class="sd">        :param plot: Whether to plot the distribution or not. The plot is made as a bar plot:</span>
+
+<span class="sd">                     &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">                     &gt;&gt;&gt; fig, ax = plt.subplots()</span>
+<span class="sd">                     &gt;&gt;&gt; ax.bar(distx, disty)</span>
+<span class="sd">                     &gt;&gt;&gt; fig.show()</span>
+
+<span class="sd">        :return: The charge state distribution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e0</span> <span class="o">=</span> <span class="n">e0</span>
+        <span class="k">if</span> <span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">e0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span>
+
+        <span class="n">mean_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_charge_state</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">c_factor</span><span class="p">)</span>
+        <span class="n">std_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">std_charge_state</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">c_factor</span><span class="p">)</span>
+        <span class="n">mean_int</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_charge</span><span class="p">)</span>
+        <span class="n">charge_x</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mean_int</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dist_onesided_len</span> <span class="o">&gt;</span> <span class="n">mean_int</span>
+            <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+                <span class="n">mean_int</span> <span class="o">-</span> <span class="n">dist_onesided_len</span><span class="p">,</span> <span class="n">mean_int</span> <span class="o">+</span> <span class="n">dist_onesided_len</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">charge_y</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">1</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">std_charge</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">charge_x</span> <span class="o">-</span> <span class="n">mean_charge</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_charge</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">charge_x</span><span class="p">,</span> <span class="n">charge_y</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Charge State Distribution for atom number </span><span class="si">{</span><span class="n">atomic_nr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Percentage&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Charge State&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean Charge: </span><span class="si">{</span><span class="n">mean_charge</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">Standard Deviation: </span><span class="si">{</span><span class="n">std_charge</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">x</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">charge_x</span><span class="p">,</span> <span class="n">charge_y</span></div>
+
+
+<div class="viewcode-block" id="ChargeState.dataframe">
+<a class="viewcode-back" href="../../rst/baroncs.html#baroncs.charge_state.ChargeState.dataframe">[docs]</a>
+    <span class="k">def</span> <span class="nf">dataframe</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">e0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">931.5</span><span class="p">,</span>
+        <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.2</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a dataframe for each atom, which contains the following:</span>
+
+<span class="sd">        - Name of the element</span>
+<span class="sd">        - Atomic Number</span>
+<span class="sd">        - Commonest Isotope</span>
+<span class="sd">        - Abundance (%)</span>
+<span class="sd">        - Melting Point</span>
+<span class="sd">        - Nearest Q (A/Q=8)</span>
+<span class="sd">        - Actual Q/A</span>
+<span class="sd">        - A/Q</span>
+<span class="sd">        - Mean Charge</span>
+<span class="sd">        - Most Probable</span>
+<span class="sd">        - Standard Deviation</span>
+<span class="sd">        - Probable %</span>
+<span class="sd">        - Magnetic Rigidity</span>
+
+<span class="sd">        If atoms is &quot;all&quot;, all atoms will be included in the dataframe. Otherwise provide it as a list of atomic</span>
+<span class="sd">        numbers. e.g. [54, 82] to only use Xe and Pb.</span>
+
+<span class="sd">        If beta is provided it will be used to create the dataframe.</span>
+<span class="sd">        Otherwise it will be calculated from the energy and e0.</span>
+
+<span class="sd">        :param beta: The relativistic factor</span>
+<span class="sd">        :param e0: The rest mass energy</span>
+<span class="sd">        :param energy: The kinetic energy</span>
+<span class="sd">        :param atoms: The atoms to include in the dataframe. If &quot;all&quot;, all atoms will be included.</span>
+<span class="sd">                      Otherwise provide it as a list of atomic numbers. e.g. [54, 82]</span>
+<span class="sd">        :param c_factor: The c factor</span>
+<span class="sd">        :return: A dataframe with the charge state distribution for each atom</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__generate</span><span class="p">(</span>
+            <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> <span class="n">e0</span><span class="o">=</span><span class="n">e0</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="n">energy</span><span class="p">,</span> <span class="n">c_factor</span><span class="o">=</span><span class="n">c_factor</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="ChargeState.mean_charge_state">
+<a class="viewcode-back" href="../../rst/baroncs.html#baroncs.charge_state.ChargeState.mean_charge_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">mean_charge_state</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">atomic_nr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the mean charge state.</span>
+
+<span class="sd">        It is based on either Equation 3 or 1 in the paper. This depends on the atomic number.</span>
+<span class="sd">        If the atomic number is less than 54, the equation 1 is used. Otherwise equation 3 is used.</span>
+
+<span class="sd">        :param atomic_nr: The atomic number</span>
+<span class="sd">        :param c_factor: The c factor</span>
+<span class="sd">        :return: The mean charge state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mean_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mean_charge_state_p</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">c_factor</span><span class="p">)</span>  <span class="c1"># Equation 1</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="c1"># This is the equation 3 in the paper</span>
+            <span class="n">mean_charge</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mean_charge_state</span><span class="p">(</span>
+                <span class="n">mean_charge</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">],</span> <span class="n">atomic_nr</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">mean_charge</span>
+
+        <span class="k">if</span> <span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">:</span>
+            <span class="c1"># This is the equation 3 in the paper</span>
+            <span class="n">mean_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mean_charge_state</span><span class="p">(</span><span class="n">mean_charge</span><span class="p">,</span> <span class="n">atomic_nr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mean_charge</span></div>
+
+
+<div class="viewcode-block" id="ChargeState.std_charge_state">
+<a class="viewcode-back" href="../../rst/baroncs.html#baroncs.charge_state.ChargeState.std_charge_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">std_charge_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atomic_nr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the standard deviation of the charge state distribution.</span>
+
+<span class="sd">        It is based on either Equation 4 or 2 in the paper. This depends on the atomic number.</span>
+<span class="sd">        If the atomic number is less than 54, the equation 2 is used. Otherwise equation 4 is used.</span>
+
+<span class="sd">        :param atomic_nr: The atomic number</span>
+<span class="sd">        :param c_factor: The c factor</span>
+<span class="sd">        :return: The standard deviation of the charge state distribution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mean_charge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mean_charge_state_p</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">c_factor</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">mean_charge</span> <span class="o">/</span> <span class="n">atomic_nr</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atomic_nr</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="n">std_charge</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_charge</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.67</span><span class="p">)))</span>
+            <span class="n">std_charge</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+                <span class="n">mean_charge</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span>
+                <span class="o">*</span> <span class="p">(</span>
+                    <span class="mf">0.07535</span>
+                    <span class="o">+</span> <span class="mf">0.19</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span>
+                    <span class="o">-</span> <span class="mf">0.2654</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">std_charge</span>
+
+        <span class="k">if</span> <span class="n">atomic_nr</span> <span class="o">&gt;=</span> <span class="mi">54</span><span class="p">:</span>
+            <span class="c1"># This is the equation 4 in the paper</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_charge</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.07535</span> <span class="o">+</span> <span class="mf">0.19</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="mf">0.2654</span> <span class="o">*</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># This is the equation 2 in the paper</span>
+            <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_charge</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.67</span><span class="p">)))</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The relativistic beta factor.</span>
+
+<span class="sd">        If beta is set as a float, it will be used as the beta factor.</span>
+<span class="sd">        If beta is set as a tuple of (energy, e0), the beta factor will be calculated from the energy and e0.</span>
+
+<span class="sd">        If used together with std_charge_state() and mean_charge_state(), the beta factor can be set as either:</span>
+
+<span class="sd">        &gt;&gt;&gt; import baroncs as bcs</span>
+<span class="sd">        &gt;&gt;&gt; tmp = bcs.ChargeState()</span>
+<span class="sd">        &gt;&gt;&gt; tmp.beta = 0.09  # Set beta directly</span>
+<span class="sd">        &gt;&gt;&gt; tmp.beta = (4, 931.5)  # Set beta from energy and e0</span>
+<span class="sd">        and then the mean charge state and standard deviation can be calculated as:</span>
+<span class="sd">        &gt;&gt;&gt; tmp.mean_charge_state(82)</span>
+<span class="sd">        &gt;&gt;&gt; tmp.std_charge_state(82)</span>
+
+<span class="sd">        :return: The relativistic beta factor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_beta</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Use charge_state_distribution() first or set beta&quot;</span><span class="p">)</span>
+
+    <span class="nd">@beta</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">beta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">e0</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">e0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;For the beta setter, provide a tuple of (energy, e0) or a float for beta&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__mean_charge_state</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">mean_charge</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">atomic_nr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">mean_charge</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">12.905</span> <span class="o">+</span> <span class="mf">0.2124</span> <span class="o">*</span> <span class="n">atomic_nr</span> <span class="o">-</span> <span class="mf">0.00122</span> <span class="o">*</span> <span class="n">atomic_nr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__mean_charge_state_p</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">atomic_nr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Equation 1 in the paper</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">atomic_nr</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="n">c_factor</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">83.28</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">/</span> <span class="p">(</span><span class="n">atomic_nr</span> <span class="o">**</span> <span class="p">(</span><span class="mf">0.447</span><span class="p">))))</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__generate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">e0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">931.5</span><span class="p">,</span>
+        <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.2</span><span class="p">,</span>
+        <span class="n">c_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;table&quot;</span><span class="p">)</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">&quot;elements.csv&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nearest Q (A/Q=8)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Commonest Isotope&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">==</span> <span class="n">x</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Actual Q/A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nearest Q (A/Q=8)&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Commonest Isotope&quot;</span><span class="p">]</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;A/Q&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Commonest Isotope&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nearest Q (A/Q=8)&quot;</span><span class="p">]</span>
+
+        <span class="c1"># If beta is provided, use it. Otherwise calculate it from the energy and e0</span>
+        <span class="k">if</span> <span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">e0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span>
+
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Mean Charge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_charge_state</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Number&quot;</span><span class="p">],</span> <span class="n">c_factor</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Most Probable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Mean Charge&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Standard Deviation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">std_charge_state</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Number&quot;</span><span class="p">],</span> <span class="n">c_factor</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Probable %&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">100</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Standard Deviation&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+                <span class="o">-</span><span class="mf">0.5</span>
+                <span class="o">*</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Most Probable&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Mean Charge&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Standard Deviation&quot;</span><span class="p">])</span>
+                <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Magnetic Rigidity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Commonest Isotope&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span>
+            <span class="o">*</span> <span class="mi">3</span>
+            <span class="o">*</span> <span class="mf">1.838</span>
+            <span class="o">/</span> <span class="p">(</span><span class="mf">1.759</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Most Probable&quot;</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">atoms</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Number&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">atoms</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Provide atoms as a list of atomic numbers&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakob Olsen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
